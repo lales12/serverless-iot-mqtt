@@ -1,6 +1,6 @@
 {
   "name": "serverless-iot-mqtt",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Mqtt plugin for serverless offline application",
   "main": "dist/ServerlessIotMqtt.js",
   "repository": "git@github.com:lales12/serverless-iot-mqtt.git",
