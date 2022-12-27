@@ -101,7 +101,7 @@ class ServerlessIotMqtt {
         });
     }
 }
-exports.default = ServerlessIotMqtt;
 ServerlessIotMqtt.DEFAULT_MQTT_URL = 'mqtt://localhost:1883';
 ServerlessIotMqtt.DEFAULT_LAMBDA_URL = 'http://localhost:3002';
 ServerlessIotMqtt.CAPTURE_TOPIC_REGEX = /SELECT .+ FROM [\'\"](.+)[\'\"]$/;
+module.exports = ServerlessIotMqtt;

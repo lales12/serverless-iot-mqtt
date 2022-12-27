@@ -9,7 +9,7 @@ export interface ServerlessIotMqttOptions {
     debug?: boolean;
 }
 
-export default class ServerlessIotMqtt {
+class ServerlessIotMqtt {
     static DEFAULT_MQTT_URL = 'mqtt://localhost:1883';
     static DEFAULT_LAMBDA_URL = 'http://localhost:3002';
     static CAPTURE_TOPIC_REGEX = /SELECT .+ FROM [\'\"](.+)[\'\"]$/;
@@ -126,3 +126,5 @@ export default class ServerlessIotMqtt {
         };
     }
 }
+
+module.exports = ServerlessIotMqtt;
