@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServerlessIotMqtt = void 0;
 const aws_sdk_1 = require("aws-sdk");
 const mqtt_1 = require("mqtt");
 const buffer_1 = require("buffer");
@@ -102,7 +101,7 @@ class ServerlessIotMqtt {
         });
     }
 }
-exports.ServerlessIotMqtt = ServerlessIotMqtt;
+exports.default = ServerlessIotMqtt;
 ServerlessIotMqtt.DEFAULT_MQTT_URL = 'mqtt://localhost:1883';
 ServerlessIotMqtt.DEFAULT_LAMBDA_URL = 'http://localhost:3002';
 ServerlessIotMqtt.CAPTURE_TOPIC_REGEX = /SELECT .+ FROM [\'\"](.+)[\'\"]$/;
