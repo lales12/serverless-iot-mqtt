@@ -111,7 +111,9 @@ class ServerlessIotMqtt {
             if (topicRegexp.test(topic)) {
                 const callback = this.service.getFunction(this.mappedFunctions[registeredTopic]);
 
-                this.invokeLambda(callback.name, {topic}, message.toString());
+                if (callback.name) {
+                    this.invokeLambda(callback.name, {topic}, message.toString());
+                }
             }
         }
     }
