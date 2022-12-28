@@ -2,11 +2,17 @@ import {Lambda} from 'aws-sdk';
 import { connect, MqttClient } from 'mqtt';
 import {Buffer} from 'buffer';
 import Serverless from 'serverless';
+import Service from 'serverless/classes/Service';
 
 export interface ServerlessIotMqttOptions {
     mqttUrl?: string;
     lambdaUrl?: string;
     debug?: boolean;
+    enabled?: boolean;
+}
+
+interface MappedFunctionsInterface {
+    [key: string]: string;
 }
 
 class ServerlessIotMqtt {
@@ -15,9 +21,9 @@ class ServerlessIotMqtt {
     static CAPTURE_TOPIC_REGEX = /SELECT .+ FROM [\'\"](.+)[\'\"]$/;
 
     private serverless: Serverless;
-    private service: any;
+    private service: Service;
     private customOptions: ServerlessIotMqttOptions;
-    private mappedFunctions: any;
+    private mappedFunctions: MappedFunctionsInterface;
     private mqttClient?: MqttClient;
     private lambda?: Lambda;
     private functions?: any;
@@ -36,6 +42,10 @@ class ServerlessIotMqtt {
 
     init() {
         console.log('-------------------Serverless IoT Plugin-------------------');
+        if (!this.customOptions.enabled) {
+            console.log('- Plugin disabled');
+            return;
+        }
 
         this.functions = this.service.functions;
         this.customOptions = this.serverless.service.custom['serverless-iot'];
