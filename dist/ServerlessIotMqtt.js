@@ -24,6 +24,10 @@ class ServerlessIotMqtt {
     }
     init() {
         console.log('-------------------Serverless IoT Plugin-------------------');
+        if (!this.customOptions.enabled) {
+            console.log('- Plugin disabled');
+            return;
+        }
         this.functions = this.service.functions;
         this.customOptions = this.serverless.service.custom['serverless-iot'];
         this.lambda = new aws_sdk_1.Lambda({
