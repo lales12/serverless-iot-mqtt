@@ -23,13 +23,13 @@ class ServerlessIotMqtt {
         };
     }
     init() {
+        this.functions = this.service.functions;
+        this.customOptions = this.serverless.service.custom['serverless-iot'];
         console.log('-------------------Serverless IoT Plugin-------------------');
         if (!this.customOptions.enabled) {
             console.log('- Plugin disabled');
             return;
         }
-        this.functions = this.service.functions;
-        this.customOptions = this.serverless.service.custom['serverless-iot'];
         this.lambda = new aws_sdk_1.Lambda({
             apiVersion: '2015-03-31',
             endpoint: this.customOptions.lambdaUrl || ServerlessIotMqtt.DEFAULT_LAMBDA_URL,
@@ -81,7 +81,9 @@ class ServerlessIotMqtt {
             const topicRegexp = this.__getTopicRegex(registeredTopic);
             if (topicRegexp.test(topic)) {
                 const callback = this.service.getFunction(this.mappedFunctions[registeredTopic]);
-                this.invokeLambda(callback.name, { topic }, message.toString());
+                if (callback.name) {
+                    this.invokeLambda(callback.name, { topic }, message.toString());
+                }
             }
         }
     }
